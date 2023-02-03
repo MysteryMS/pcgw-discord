@@ -1,0 +1,24 @@
+# fly.toml file generated for pcgw on 2023-02-03T15:31:14-03:00
+
+app = "pcgw"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[experimental]
+  auto_rollback = true
+  cmd = ["npm", "start"]
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
